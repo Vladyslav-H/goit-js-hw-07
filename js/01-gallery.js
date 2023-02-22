@@ -4,29 +4,28 @@ import { galleryItems } from "./gallery-items.js";
 console.log(galleryItems);
 
 const galleryEl = document.querySelector(".gallery");
-const imageEl = document.querySelector(".gallery__image");
 const galleryCards = createGalleryMarkup(galleryItems);
 
 galleryEl.insertAdjacentHTML("afterbegin", galleryCards);
 
-function createGalleryMarkup() {
-  return galleryItems
+galleryEl.addEventListener("click", onOpenModalWindow);
+
+function createGalleryMarkup(images) {
+  return images
     .map(
-      (element) => `<div class="gallery__item">
-  <a class="gallery__link" href="${element.original}">
+      ({ original, preview, description }) => `<div class="gallery__item">
+  <a class="gallery__link" href="${original}">
     <img
       class="gallery__image"
-      src="${element.preview}"
-      data-source="${element.original}"
-      alt="${element.description}"
+      src="${preview}"
+      data-source="${original}"
+      alt="${description}"
     />
   </a>
 </div>`
     )
     .join("");
 }
-
-galleryEl.addEventListener("click", onOpenModalWindow);
 
 function onOpenModalWindow(event) {
   event.preventDefault();
