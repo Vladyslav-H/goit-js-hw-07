@@ -8,8 +8,6 @@ const galleryCards = createGalleryMarkup(galleryItems);
 
 galleryEl.insertAdjacentHTML("afterbegin", galleryCards);
 
-galleryEl.addEventListener("click", onOpenModalWindow);
-
 function createGalleryMarkup(images) {
   return images
     .map(
@@ -27,17 +25,17 @@ function createGalleryMarkup(images) {
     .join("");
 }
 
+galleryEl.addEventListener("click", onOpenModalWindow);
+
 function onOpenModalWindow(event) {
   event.preventDefault();
 
   if (!event.target.classList.contains("gallery__image")) {
     return;
   }
-  basicLightbox
-    .create(
-      `
-		<img  src="${event.target.dataset.source}">
-	`
-    )
-    .show();
+  createModalImage(event.target.dataset.source);
+}
+
+function createModalImage(image) {
+  basicLightbox.create(`<img  src="${image}">`).show();
 }
