@@ -3,16 +3,16 @@ import { galleryItems } from "./gallery-items.js";
 
 console.log(galleryItems);
 
-const galleryEl = document.querySelector(".gallery");
-const galleryCards = createGalleryMarkup(galleryItems);
-const lightboxSettings = {
+export const galleryEl = document.querySelector(".gallery");
+export const galleryCards = createGalleryMarkup(galleryItems);
+export const lightboxSettings = {
   captions: true,
   captionsData: "alt",
   captionDelay: 250,
 };
-galleryEl.insertAdjacentHTML("afterbegin", galleryCards);
+export const galleryBuild = galleryEl.insertAdjacentHTML("afterbegin", galleryCards);
 
-function createGalleryMarkup(images) {
+export function createGalleryMarkup(images) {
   return images
     .map(
       ({
@@ -26,4 +26,4 @@ function createGalleryMarkup(images) {
     .join("");
 }
 
-const lightbox = new SimpleLightbox(".gallery a", lightboxSettings);
+export const lightbox = new SimpleLightbox(".gallery a", lightboxSettings);
