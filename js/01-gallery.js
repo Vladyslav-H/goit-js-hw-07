@@ -29,13 +29,20 @@ galleryEl.addEventListener("click", onOpenModalWindow);
 
 function onOpenModalWindow(event) {
   event.preventDefault();
+  const instance = basicLightbox.create(
+    `<img  src="${event.target.dataset.source}">`
+  );
 
   if (!event.target.classList.contains("gallery__image")) {
     return;
   }
-  createModalImage(event.target.dataset.source);
-}
 
-function createModalImage(image) {
-  basicLightbox.create(`<img  src="${image}">`).show();
+  instance.show();
+
+  galleryEl.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      instance.close();
+    }
+  });
+  console.log(event.key === "Escape");
 }
